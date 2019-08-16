@@ -12,5 +12,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->truncateTablas([
+            'rol',
+            'permiso'
+        ]);
+        $this->call(tablaRolSeeder::class);
+        $this->call(tablaPermisoSeeder::class);
+    }
+
+    protected function TruncateTablas(array $tablas)
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');//Deshabilitar foreigns no recomendable cuando ya este la BD y el sistema en ejecucion
+        foreach ($tablas as $tabla){
+            DB::table($tabla) ->truncate(); //truncar toda la bd
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');//Hablitar llaves foraneas
     }
 }
