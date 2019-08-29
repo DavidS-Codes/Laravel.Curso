@@ -16,3 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('permiso','PermisoController@index');
+
+Route::get('/phpversion', function() {
+    return response()->json([
+     'stuff' => phpinfo()
+    ]);
+ });
